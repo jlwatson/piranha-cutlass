@@ -398,9 +398,10 @@ public:
     }
 
     // check alignment constraint on iterator's contiguous dimension
-    if (problem_size.K % (128/sizeof_bits<Element>::value)) {
-      return Status::kErrorNotSupported;
-    }
+    // XXX
+    //if (problem_size.K % (128/sizeof_bits<Element>::value)) {
+    //  return Status::kErrorNotSupported;
+    //}
 
     // Limit on filter size
     if (problem_size.R > 32 || problem_size.S > 32) {

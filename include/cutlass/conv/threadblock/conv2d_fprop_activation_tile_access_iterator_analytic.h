@@ -250,9 +250,10 @@ public:
   static Status can_implement(Conv2dProblemSize const &problem_size) {
 
     // check alignment constraint on iterator's contiguous dimension
-    if (problem_size.C % (128/sizeof_bits<Element>::value)) {
-      return Status::kErrorInvalidProblem;
-    }
+    // XXX turn off check
+    //if (problem_size.C % (128/sizeof_bits<Element>::value)) {
+    //  return Status::kErrorInvalidProblem;
+    //}
 
     if (platform::is_same<Layout, layout::TensorNCxHWx<32>>::value) {
       if (problem_size.C % 32) {

@@ -133,6 +133,62 @@ template <
   /// Layout of C matrix
   typename LayoutC
 >
+struct Mma<gemm::GemmShape<1, 1, 1>, 1, uint32_t, LayoutA, uint32_t, LayoutB, uint32_t, LayoutC, OpMultiplyAdd> {
+
+  using Shape = gemm::GemmShape<1, 1, 1>;
+  using Operator = OpMultiplyAdd;
+
+  CUTLASS_HOST_DEVICE
+  void operator()(
+    Array<uint32_t, 1> &d,
+    Array<uint32_t, 1> const &a,
+    Array<uint32_t, 1> const &b,
+    Array<uint32_t, 1> const &c
+  ) {
+
+    d[0] = a[0] * b[0] + c[0];
+  }
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Matrix multiply-add operation
+template <
+  /// Layout of A matrix
+  typename LayoutA,
+  /// Layout of B matrix
+  typename LayoutB,
+  /// Layout of C matrix
+  typename LayoutC
+>
+struct Mma<gemm::GemmShape<1, 1, 1>, 1, uint64_t, LayoutA, uint64_t, LayoutB, uint64_t, LayoutC, OpMultiplyAdd> {
+
+  using Shape = gemm::GemmShape<1, 1, 1>;
+  using Operator = OpMultiplyAdd;
+
+  CUTLASS_HOST_DEVICE
+  void operator()(
+    Array<uint64_t, 1> &d,
+    Array<uint64_t, 1> const &a,
+    Array<uint64_t, 1> const &b,
+    Array<uint64_t, 1> const &c
+  ) {
+
+    d[0] = a[0] * b[0] + c[0];
+  }
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// Matrix multiply-add operation
+template <
+  /// Layout of A matrix
+  typename LayoutA,
+  /// Layout of B matrix
+  typename LayoutB,
+  /// Layout of C matrix
+  typename LayoutC
+>
 struct Mma<
   gemm::GemmShape<1, 1, 1>,
   1,
